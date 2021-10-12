@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Message Menu</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<table>
+			<tr>
+				<th colspan="2">Received Messages</th>
+				<th colspan="2">Sent Messages</th>
+			</tr>
+			<tr>
+				<td>list of received messages</td>
+				<td>text of selected message</td>
+				<td>list of sent messages</td>
+				<td>text of selected message</td>
+			</tr>
+			<tr>
+				<td width="25%" style="text-align: center">
+					<select size="10" style="width: 80%" th:onchange="document.getElementById('selectedRcvMsg').value = document.getElementById('rcvMsg').value" id="rcvMsg">
+						<option th:each="m : ${received_messages}" th:value="${m.text}" th:utext="${#temporals.format(m.sendTime, 'yyyy-MM-dd HH:mm')} + ' ' + ${m.sender} + ' -> ' + ${m.receiver}"/>
+					</select>
+				</td>
+				<td width="25%" style="text-align: center">
+					<textarea rows="10" cols="20" style="width: 80%" id="selectedRcvMsg" readonly="true"></textarea>
+				</td>
+				<td width="25%" style="text-align: center">
+					<select size="10" style="width: 80%" th:onchange="document.getElementById('selectedSndMsg').value = document.getElementById('sndMsg').value" id="sndMsg">
+						<option th:each="m : ${sent_messages}" th:value="${m.text}" th:utext="${#temporals.format(m.sendTime, 'yyyy-MM-dd HH:mm')} + ' ' + ${m.sender} + ' -> ' + ${m.receiver}" />
+					</select>
+				</td>
+				<td width="25%" style="text-align: center">
+					<textarea rows="10" cols="20" style="width: 80%" id="selectedSndMsg" readonly="true"></textarea>
+				</td>
+			</tr>
+			<tr><td colspan="4"><hr></td></tr>
+			<tr>
+				<td colspan="4">
+					<form th:action="@{/send_message}" th:object="${message}" method="post">
+						<div>Send new message</div>
+						<div>
+							<textarea th:field=*{text} rows="20" cols="160"></textarea>
+						</div>
+						<div>
+							<label for="recipient">Recipient:</label>
+							<select th:field="*{receiver}">
+								<option value="">--</option>
+								<option th:each="recipient : ${recipients}" th:value="${recipient.username}" th:utext="${recipient.username}" />
+							</select>
+							<input type="submit" value="Send" />
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

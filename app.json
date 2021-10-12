@@ -1,0 +1,5 @@
+{
+  "name": "Harry's Java test-app",
+  "description": "A simple Java app, to learn how to use Heroku.",
+  "addons": [ "heroku-postgresql" ]
+}

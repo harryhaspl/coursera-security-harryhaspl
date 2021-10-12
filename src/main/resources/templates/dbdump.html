@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Database Contents</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+   	    <h1>Database Content:</h1>
+   		<pre th:utext="${dbDump}"></pre>
+    </div>
+</body>
+</html>

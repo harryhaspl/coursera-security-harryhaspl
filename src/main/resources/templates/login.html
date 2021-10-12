@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1>Login</h1>
+
+	    <p th:if="${logged_in_id} == null" >Please register or login to your account to use the Secure Messaging System.</p>
+	    <p th:unless="${logged_in_id} == null" th:text="'You are currently logged in as user ' + ${logged_in_id} + '.'" ></p>
+	    <p th:unless="${logged_in_id} == null">Please proceed to the Message Center to send/receive messages.</p>
+	    <p th:unless="${logged_in_id} == null">Or login as someone else here:</p>
+
+		<form th:action="@{/login}" th:object="${userData}" method="post">
+			<table>
+				<tr>
+					<td><label>username:</label></td>
+					<td colspan="2"><input type="text" th:field="*{username}"
+						placeholder="string" /></td>
+				</tr>
+				<tr>
+					<td><label>password:</label></td>
+					<td colspan="2"><input id="password" type="password" th:field="*{passedPassword}"
+						placeholder="string" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Login" name="action"/></td>
+					<td><input type="submit" value="Register" name="action"/></td>
+				</tr>
+			</table>
+		</form>
+		
+		<div th:unless="${error_message} == null">
+			<h2>Error:</h2>
+			<p th:text="${error_message}"></p>
+			<div th:unless="${password_policy_error} == null">
+				<ul>
+				<li><h3>Password Policy:</h3></li>
+				<li>Minimum of 8 characters</li>
+				<li>Must contain at least one of the following: upper case, lower case, digit, and symbol</li>
+				<li>No whitespace characters</li>
+				</ul>
+			</div>
+			
+		</div>
+		
+		
+		
+		
+		<h2>the following users are already registered:</h2>
+		<ul>
+		<li th:each="user : ${users}" th:text="${user.username}"/>
+		</ul>
+
+	</div>
+</body>
+</html>

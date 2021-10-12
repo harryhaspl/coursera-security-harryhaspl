@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Admin Menu</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/admin}" th:object="${adminAction}" method="post">
+			<table>
+				<tr>
+					<td>user administration</td>
+					<td>
+						<button type="submit" value="show" name="action">show registered users</button>
+					</td>
+				</tr>
+				<!-- 
+				<tr>
+					<td>delete all data from database</td>
+					<td>
+						<button type="submit" value="drop" name="action">Delete all data!</button>
+					</td>
+				</tr>
+				 -->
+				<tr>
+					<td>show database content</td>
+					<td>
+						<button type="submit" value="download" name="action">Show database content</button>
+					</td>
+				</tr>
+				<!-- 
+				<tr>
+					<td>restore database data</td>
+					<td>
+						<button type="submit" value="restore" name="action">Restore database</button>
+					</td>
+				</tr>
+				 -->
+			</table>
+		</form>
+	</div>
+</body>
+</html>

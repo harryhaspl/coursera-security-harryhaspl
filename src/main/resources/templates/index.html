@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+    <title>Secure Message System</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <h1>Welcome to the super secure Messaging system</h1>
+    </header>
+
+
+
+    <div layout:fragment="content">
+    <p th:if="${logged_in_id} == null" >Please register or login to your account to use the Secure Messaging System.</p>
+    <p th:unless="${logged_in_id} == null" >Please proceed to the Message Center to send/receive messages.</p>
+    </div>
+
+    
+    <footer th:fragment="footer">
+    </footer>
+</body>
+</html>

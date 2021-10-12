@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
+
+<style>
+body{
+   margin:0px;
+   margin-top:60px;
+   padding: 0px;
+}
+nav{
+   display: flex;
+   position: fixed;
+   top:0;
+   width: 100%;
+   background-color: #007bff;
+   overflow: auto;
+   height: auto;
+   font-family: Arial;
+   font-size: 20px;
+}
+.center{
+   display: flex;
+   justify-content: center;
+   color: yellow;
+   font-weight: bold;
+   margin-bottom: 0;
+}
+.left-links{
+   flex:1 1 200px;
+}
+.links {
+   display: inline-block;
+   text-align: center;
+   padding: 14px;
+   color: #fff;
+   text-decoration: none;
+   font-weight: bolder;
+   background-color: transparent;
+}
+.links:hover {
+   border-bottom: 2px solid purple;
+}
+.selected{
+   border-bottom: 2px solid purple;
+}
+</style>
+</head>
+<body>
+
+	<!-- Main Navigation -->
+	<nav>
+	<div class="left-links">
+		<a class="links selected" th:href="@{/}">Super Secure Messaging System</a>
+	</div>
+
+	<div class="left-links">
+	<p class="center" th:utext="${logged_in_id}"></p>
+	</div>
+
+		<div class="right-links">
+				<a class="links" th:href="@{/}">Homepage</a>
+				<a class="links" th:href="@{/admin_menu}">Admin</a>
+								
+				<a th:if="${logged_in_id} == null" class="links" th:href="@{/login}">Login</a>
+				<a th:unless="${logged_in_id} == null" class="links" th:href="@{/logout}">Logout</a>
+				
+				<a class="links" th:href="@{/messages}">Messages</a>
+		</div>
+	</nav>
+
+	<!-- Content Section -->
+	<section layout:fragment="content" style="padding-top: 50px;">
+		<p>This is filled by the content template.</p>
+	</section>
+
+	<!-- Footer -->
+	<footer class="container py-5">
+		<div class="row">
+			<div class="col-md-12">
+				<p class="text-muted">2021 Harry secure messaging system.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Optional Section -->
+	<th:block layout:fragment="optional" />
+
+</body>
+</html>
+

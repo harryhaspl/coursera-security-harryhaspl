@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Show Users</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<h1>Database Output</h1>
+			<table>
+			<tr>
+			<th>User Name</th>
+			</tr>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.username}" />
+				<!-- 
+				<td>
+				<a th:href="@{/deleteUser(username=${user.username})}">Delete</a>
+				</td>
+				 -->
+			</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Restore Database</title>
+	<style>
+	.add-link::after {
+		content: " (" attr(href) ")";
+	}
+	</style>
+</head>
+
+<body>
+    <div layout:fragment="content">
+	<form th:action="@{/restore_database}" th:object="${dbData}" method="post">    
+	    <p>User Data:</p>
+		<textarea th:field=*{userData} rows="20" cols="80"></textarea>
+	    <p>Message Data:</p>
+		<textarea th:field=*{messageData} rows="20" cols="80"></textarea>
+
+        <input type="submit" name="restoreData" value="Restore Database"></input>	    
+    </form>
+    </div>
+</body>
+</html>
